@@ -1,10 +1,10 @@
-# PHP JsonDB
+# PHP JLDB (JSON Lite DB)
 Simple and powerfull tool that allows to use json file like a database. It provides collection of methods that you can use like a database query builder.
 
 ## Installation
 
 ```json
-composer require samirzz/json-db
+composer require samirzz/jldb
 ```
 
 ## Usage
@@ -146,6 +146,14 @@ $countProducts = $db->table('products')->count();
 
 // Get count of column=value in the table
 $countOrange = $db->table('products')->countOf("name", "Orange");
+
+// If you love object style you can convert the array to object like that
+// use toObject() helper function
+$users = toObject($db->table('users')->get());
+
+foreach ($users as $user) {
+    echo $user->name;
+}
 
 ```
 
