@@ -12,5 +12,5 @@ namespace Samirzz\JsonDB;
      */
      function toObject(array $array)
     {
-     return json_decode(json_encode($array));
+     return (object)json_decode(json_encode($array));
     }
