@@ -17,7 +17,7 @@ composer require samirzz/json-db
 return [
 
     /**
-     * The default json file that the user store the data on it.
+     * The default json file storage path that the user store the data on it.
      */
     'db_path' => __DIR__ . '/../storage',
 
