@@ -3,3 +3,4 @@ config/
 storage/
 index.php
 todo.md
+gitpush.sh

@@ -1,3 +1,11 @@
+<p align="center"><img src="https://repository-images.githubusercontent.com/232873829/e2c45600-33b0-11ea-941f-ba319f2d3c52" width="500"/></p>
+<p align="center">
+<a href="https://github.styleci.io/repos/232873829"><img src="https://github.styleci.io/repos/232873829/shield?branch=master" /></a>
+<a href="https://packagist.org/packages/samirzz/jldb"><img src="https://img.shields.io/packagist/php-v/samirzz/jldb?label=php&style=flat-square"/></a>
+<a href="https://packagist.org/packages/samirzz/jldb"><img src="https://img.shields.io/github/contributors/mohamed-samir907/jldb?style=flat-square"/></a>
+<a href="https://packagist.org/packages/samirzz/jldb"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square"/></a>
+</p>
+
 # PHP JLDB (JSON Lite DB)
 Simple and powerfull tool that allows to use json file like a database. It provides collection of methods that you can use like a database query builder.
 
