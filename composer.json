@@ -1,6 +1,6 @@
 {
     "name": "samirzz/json-db",
-    "description": "Simple package to add delete update data in json files like a database",
+    "description": "Simple and powerfull tool that allows to use json file like a database. It provides collection of methods that you can use like a database query builder.",
     "license": "MIT",
     "authors": [
         {
