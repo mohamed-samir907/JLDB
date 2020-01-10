@@ -1,0 +1,5 @@
+vendor/
+config/
+storage/
+index.php
+todo.md

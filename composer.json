@@ -1,0 +1,20 @@
+{
+    "name": "samirzz/json-db",
+    "description": "Simple package to add delete update data in json files like a database",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Samir",
+            "email": "gm.mohamedsamir@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Samirzz\\JsonDB\\": "src/"
+        }
+    }
+}
