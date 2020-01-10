@@ -1,11 +1,12 @@
 <?php
 
-if (! function_exists('toObject')) {
+if (!function_exists('toObject')) {
 
     /**
-     * Convert array to object
+     * Convert array to object.
      *
-     * @param  array $array
+     * @param array $array
+     *
      * @return object
      */
     function toObject(array $array)

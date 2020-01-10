@@ -5,7 +5,7 @@ namespace Samirzz\JsonDB;
 trait Builder
 {
     /**
-     * Prepare everything pefore do an operation
+     * Prepare everything pefore do an operation.
      *
      * @return string
      */
@@ -16,20 +16,20 @@ trait Builder
     }
 
     /**
-     * Create json file with the db name if the file not exists
+     * Create json file with the db name if the file not exists.
      *
      * @return void
      */
     public function createFileIfNotExists()
     {
-        if (! file_exists($this->getDB())) {
+        if (!file_exists($this->getDB())) {
             $table = json_encode([$this->table => []]);
             file_put_contents($this->getDB(), $table);
         }
     }
 
     /**
-     * Create new table if not exists
+     * Create new table if not exists.
      *
      * @return void
      */
@@ -41,7 +41,7 @@ trait Builder
             $database[$this->table] = [];
         }
 
-        if (! array_key_exists($this->table, $database)) {
+        if (!array_key_exists($this->table, $database)) {
             $database[$this->table] = [];
         }
 
@@ -50,7 +50,7 @@ trait Builder
     }
 
     /**
-     * Get all data from the database
+     * Get all data from the database.
      *
      * @return array
      */
@@ -60,7 +60,7 @@ trait Builder
     }
 
     /**
-     * Save last edits on the database
+     * Save last edits on the database.
      *
      * @return void
      */
@@ -70,21 +70,22 @@ trait Builder
     }
 
     /**
-     * Rewrite table on the database
+     * Rewrite table on the database.
      *
-     * @param  array $table
+     * @param array $table
+     *
      * @return void
      */
     public function rewriteDatabaseTable(array $table)
     {
-        $database               = $this->all();
+        $database = $this->all();
         $database[$this->table] = $table;
-        $this->latestDB         = $database;
+        $this->latestDB = $database;
         $this->save();
     }
 
     /**
-     * Get the last id from table
+     * Get the last id from table.
      *
      * @return int
      */
@@ -101,10 +102,11 @@ trait Builder
     }
 
     /**
-     * Get the record index if exists
+     * Get the record index if exists.
      *
-     * @param  string|int $id
-     * @param  string $primaryKey
+     * @param string|int $id
+     * @param string     $primaryKey
+     *
      * @return bool|int
      */
     public function getRecordIndex($id, string $primaryKey = 'id')

@@ -14,7 +14,7 @@ trait Condition
         '>=',
         '<=',
         '!=',
-        '<>'
+        '<>',
     ];
 
     /** @var string */
@@ -27,17 +27,18 @@ trait Condition
     private $whereValue;
 
     /**
-     * Prepare where statement
+     * Prepare where statement.
      *
-     * @param  string $column
-     * @param  string $value
-     * @param  string $operation
+     * @param string $column
+     * @param string $value
+     * @param string $operation
+     *
      * @return $this
      */
     public function where(string $column, string $operation, string $value)
     {
         $this->whereColumn = $column;
-        
+
         if (!in_array($operation, $this->operations)) {
             throw new Exception('Not supported operation');
         }
@@ -53,18 +54,19 @@ trait Condition
     }
 
     /**
-     * Prepare where statement
+     * Prepare where statement.
      *
-     * @param  array $records
+     * @param array $records
+     *
      * @return null|array
      */
     protected function executeWhere($records)
     {
-        if ($this->whereColumn != null 
-            && $this->whereValue != null 
+        if ($this->whereColumn != null
+            && $this->whereValue != null
             && $this->whereOperation != null
         ) {
-            $this->records = array_filter($records, function($record) {
+            $this->records = array_filter($records, function ($record) {
                 return $this->getOperation($record[$this->whereColumn], $this->whereValue);
             }, ARRAY_FILTER_USE_BOTH);
         }
@@ -73,10 +75,11 @@ trait Condition
     }
 
     /**
-     * Get the operation condition
-     * 
-     * @param  string $column
-     * @param  string $value
+     * Get the operation condition.
+     *
+     * @param string $column
+     * @param string $value
+     *
      * @return bool
      */
     protected function getOperation($column, $value)
