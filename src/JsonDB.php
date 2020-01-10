@@ -3,50 +3,48 @@
 namespace Samirzz\JsonDB;
 
 use Exception;
-use Samirzz\JsonDB\Validate;
-use Samirzz\JsonDB\Condition;
 
 class JsonDB
 {
-    use Builder, Condition;
-    
+    use Builder;
+    use Condition;
     /**
-     * The Storage Path that the json file exists on it
+     * The Storage Path that the json file exists on it.
      *
      * @var array
      */
     private $dbPath;
 
     /**
-     * The json file name
+     * The json file name.
      *
      * @var string
      */
     private $dbName;
 
     /**
-     * The node that we need to create|read|update|delete on it
+     * The node that we need to create|read|update|delete on it.
      *
      * @var string
      */
     private $table;
 
     /**
-     * The database after last edit, Used to put the data on it 
+     * The database after last edit, Used to put the data on it.
      *
      * @var array
      */
     private $latestDB;
 
     /**
-     * The data the fetched from the table
+     * The data the fetched from the table.
      *
      * @var array
      */
     private $records;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $config
      */
@@ -57,19 +55,20 @@ class JsonDB
     }
 
     /**
-     * Get the full path of the database name
+     * Get the full path of the database name.
      *
      * @return string
      */
     public function getDB()
     {
-        return rtrim($this->dbPath, '/') . '/' . ltrim($this->dbName, '/');
+        return rtrim($this->dbPath, '/').'/'.ltrim($this->dbName, '/');
     }
 
     /**
-     * Node on the json file
+     * Node on the json file.
      *
-     * @param  string $table
+     * @param string $table
+     *
      * @return $this
      */
     public function table(string $table)
@@ -80,7 +79,7 @@ class JsonDB
     }
 
     /**
-     * Get all data from the database
+     * Get all data from the database.
      *
      * @return array
      */
@@ -90,7 +89,7 @@ class JsonDB
     }
 
     /**
-     * Get the data from table
+     * Get the data from table.
      *
      * @return null|array
      */
@@ -106,20 +105,21 @@ class JsonDB
     }
 
     /**
-     * Store new record
+     * Store new record.
      *
-     * @param  mixed $data
+     * @param mixed $data
+     *
      * @return bool
      */
     public function create(array $data, $primaryKey = 'id')
     {
-        if ($exists = array_key_exists($primaryKey, $data) 
+        if ($exists = array_key_exists($primaryKey, $data)
             && $this->find($data[$primaryKey]) != null
         ) {
-            throw new Exception("Duplicated ID");
+            throw new Exception('Duplicated ID');
         }
 
-        if (! $exists) {
+        if (!$exists) {
             $data[$primaryKey] = ($this->getLastId() + 1);
         }
 
@@ -132,11 +132,12 @@ class JsonDB
     }
 
     /**
-     * Update an existing record
+     * Update an existing record.
      *
-     * @param  string|int $id
-     * @param  array $data
-     * @param  string $primaryKey
+     * @param string|int $id
+     * @param array      $data
+     * @param string     $primaryKey
+     *
      * @return null|array
      */
     public function update($id, array $data, $primaryKey = 'id')
@@ -157,10 +158,11 @@ class JsonDB
     }
 
     /**
-     * Find a record on the table
+     * Find a record on the table.
      *
-     * @param  string|int $id
-     * @param  string $primaryKey
+     * @param string|int $id
+     * @param string     $primaryKey
+     *
      * @return null|array
      */
     public function find($id, string $primaryKey = 'id')
@@ -175,10 +177,11 @@ class JsonDB
     }
 
     /**
-     * Delete existing record
+     * Delete existing record.
      *
-     * @param  string|int $id
-     * @param  string $primaryKey
+     * @param string|int $id
+     * @param string     $primaryKey
+     *
      * @return bool
      */
     public function delete($id, $primaryKey = 'id')
@@ -198,9 +201,10 @@ class JsonDB
     }
 
     /**
-     * Paginate the records
+     * Paginate the records.
      *
-     * @param  integer $size
+     * @param int $size
+     *
      * @return array
      */
     public function paginate(int $size)
@@ -210,17 +214,17 @@ class JsonDB
         $data = array_chunk($this->get(), $size)[$page - 1];
 
         return [
-            'data' => $data,
+            'data'   => $data,
             'schema' => [
-                'current_page' => $page,
-                'next_page' => ($page + 1),
-                'previous_page' => ($page == 1) ? null : ($page - 1)
-            ]
+                'current_page'  => $page,
+                'next_page'     => ($page + 1),
+                'previous_page' => ($page == 1) ? null : ($page - 1),
+            ],
         ];
     }
 
     /**
-     * Get the last record on the table
+     * Get the last record on the table.
      *
      * @return mixed
      */
@@ -230,7 +234,7 @@ class JsonDB
     }
 
     /**
-     * Get the last record on the table
+     * Get the last record on the table.
      *
      * @return mixed
      */
@@ -240,7 +244,7 @@ class JsonDB
     }
 
     /**
-     * Get the count of records on the table
+     * Get the count of records on the table.
      *
      * @return int
      */
@@ -250,9 +254,10 @@ class JsonDB
     }
 
     /**
-     * Get the count of column in the table
+     * Get the count of column in the table.
      *
-     * @param  string $column
+     * @param string $column
+     *
      * @return int
      */
     public function countOf($column, $value)

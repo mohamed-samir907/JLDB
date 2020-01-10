@@ -8,9 +8,10 @@ trait Join
     private $joinTable;
 
     /**
-     * Prepare join statement
+     * Prepare join statement.
      *
-     * @param  string $table
+     * @param string $table
+     *
      * @return $this
      */
     public function join(string $table)
