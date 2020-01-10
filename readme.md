@@ -29,7 +29,7 @@ return [
 
 ```
 
-2. include config file in your porject and create new object from the class like that
+2. include config file in your project and create new object from the class like that
 
 ```php
 <?php
