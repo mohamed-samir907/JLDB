@@ -1,5 +1,5 @@
 {
-    "name": "samirzz/json-db",
+    "name": "samirzz/jldb",
     "description": "Simple and powerfull tool that allows to use json file like a database. It provides collection of methods that you can use like a database query builder.",
     "license": "MIT",
     "authors": [
