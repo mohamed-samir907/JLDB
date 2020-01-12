@@ -166,11 +166,20 @@ foreach ($users as $user) {
 ```
 
 ## TODO
+- add join, like, take, skip, groupBy, orderBy
+- support functions like sum, avg, ... and allow the user to create his own function.
 - select(...$columns)
-- join
-- sum
-- avg
-- orderBy
-- like
-- take
-- skip
+- create prepare trait to check pendings and return the result of them.
+
+- change the structure
+    - create folder for each database
+    - create json file for each table
+
+- add encryption to the database
+- add username, password for connect to the database.
+- add Model for each table
+- add schema class and save the tables schema in json file related to the database it self.
+- add validation class for validate the type of the column.
+- add relationships between tables.
+
+- Add support to redis

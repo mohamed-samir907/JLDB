@@ -2,7 +2,7 @@
 
 namespace Samirzz\JsonDB;
 
-use Exception;
+use Samirzz\JsonDB\Exceptions\DuplicatedIdException;
 
 class JsonDB
 {
@@ -116,7 +116,7 @@ class JsonDB
         if ($exists = array_key_exists($primaryKey, $data)
             && $this->find($data[$primaryKey]) != null
         ) {
-            throw new Exception('Duplicated ID');
+            throw new DuplicatedIdException('Duplicated ID');
         }
 
         if (!$exists) {
@@ -148,13 +148,20 @@ class JsonDB
             return null;
         }
 
-        $data[$primaryKey] = $id;
         $table = $this->get();
-        $table[$index] = $data;
+        $record = $table[$index];
+
+        foreach ($data as $key => $value) {
+            if ($key != $primaryKey) {
+                $record[$key] = $value;
+            }
+        }
+
+        $table[$index] = $record;
 
         $this->rewriteDatabaseTable($table);
 
-        return $data;
+        return $table[$index];
     }
 
     /**
@@ -207,9 +214,9 @@ class JsonDB
      *
      * @return array
      */
-    public function paginate(int $size)
+    public function paginate(int $size, $page = 1)
     {
-        $page = isset($_GET['page']) && (intval($_GET['page']) > 0) ? $_GET['page'] : 1;
+        $page = intval($page);
 
         $data = array_chunk($this->get(), $size)[$page - 1];
 
@@ -230,7 +237,9 @@ class JsonDB
      */
     public function last()
     {
-        return end($this->get());
+        $data = $this->get();
+        
+        return end($data);
     }
 
     /**

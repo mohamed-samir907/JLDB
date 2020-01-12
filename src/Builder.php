@@ -79,7 +79,7 @@ trait Builder
     public function rewriteDatabaseTable(array $table)
     {
         $database = $this->all();
-        $database[$this->table] = $table;
+        $database[$this->table] = array_values($table);
         $this->latestDB = $database;
         $this->save();
     }
@@ -91,14 +91,15 @@ trait Builder
      */
     public function getLastId()
     {
-        $lastId = 0;
-        $lastRecord = end($this->get());
+        $tableData = $this->get();
+
+        $lastRecord = (count($tableData) > 0) ? end($tableData) : 0;
 
         if ($lastRecord !== false) {
-            $lastId = $lastRecord['id'];
+            return $lastRecord['id'];
         }
 
-        return $lastId;
+        return $lastRecord;
     }
 
     /**
@@ -112,5 +113,15 @@ trait Builder
     public function getRecordIndex($id, string $primaryKey = 'id')
     {
         return array_search($id, array_column($this->get(), $primaryKey));
+    }
+
+    /**
+     * Delete all data in the database.
+     *
+     * @return void
+     */
+    public function cleanDatabase()
+    {
+        file_put_contents($this->getDB(), '');
     }
 }
