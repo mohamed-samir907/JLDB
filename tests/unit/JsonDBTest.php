@@ -1,13 +1,13 @@
 <?php
 
-use Samirzz\JsonDB\JsonDB;
 use PHPUnit\Framework\TestCase;
 use Samirzz\JsonDB\Exceptions\DuplicatedIdException;
+use Samirzz\JsonDB\JsonDB;
 
 class JsonDBTest extends TestCase
 {
     private $config = [
-        'db_path' => __DIR__ . '/../../storage',
+        'db_path' => __DIR__.'/../../storage',
         'db_name' => 'database.json',
     ];
 
@@ -17,7 +17,7 @@ class JsonDBTest extends TestCase
     {
         $this->db = new JsonDB($this->config);
     }
-    
+
     /** @test */
     public function testCanCreateNewInstanceFromTheClass()
     {
@@ -29,7 +29,7 @@ class JsonDBTest extends TestCase
     {
         $this->assertIsString($this->db->getDB());
     }
-    
+
     /** @test */
     public function testCanCreateFileIfNotExists()
     {
@@ -43,19 +43,19 @@ class JsonDBTest extends TestCase
 
         $this->assertNull($this->db->createTableIfNotExists());
     }
-    
+
     /** @test */
     public function testCanGetAllTablesData()
     {
         $this->assertIsArray($this->db->all());
     }
-    
+
     /** @test */
     public function testCanCreateRecord()
     {
         $data = $this->db->table('users')->create([
-            "name" => "Mohamed Samir",
-            "email" => "gm.mohamedsamir@gmail.com"
+            'name'  => 'Mohamed Samir',
+            'email' => 'gm.mohamedsamir@gmail.com',
         ]);
 
         $this->assertIsArray($data);
@@ -67,9 +67,9 @@ class JsonDBTest extends TestCase
         $this->expectException(DuplicatedIdException::class);
 
         $data = $this->db->table('users')->create([
-            "id" => 1,
-            "name" => "Mohamed Samir",
-            "email" => "gm.mohamedsamir@gmail.com"
+            'id'    => 1,
+            'name'  => 'Mohamed Samir',
+            'email' => 'gm.mohamedsamir@gmail.com',
         ]);
     }
 
@@ -79,9 +79,9 @@ class JsonDBTest extends TestCase
         $lastId = $this->db->table('users')->getLastId();
 
         $data = [
-            "id" => ($lastId + 1),
-            "name" => "Mohamed Samir",
-            "email" => "gm.mohamedsamir@gmail.com"
+            'id'    => ($lastId + 1),
+            'name'  => 'Mohamed Samir',
+            'email' => 'gm.mohamedsamir@gmail.com',
         ];
 
         $expected = $this->db->table('users')->create($data);
@@ -93,28 +93,28 @@ class JsonDBTest extends TestCase
     public function testCanUpdateExistingRecord()
     {
         $data = [
-            "name" => "Mohamed Samir 2",
-            "github" => "github.com/mohamed-samir907"
+            'name'   => 'Mohamed Samir 2',
+            'github' => 'github.com/mohamed-samir907',
         ];
 
         $expected = $this->db->table('users')->update(1, $data);
 
         $this->assertIsArray($expected);
     }
-    
+
     /** @test */
     public function testCanNotUpdateNotExistingRecord()
     {
         $data = [
-            "name" => "Mohamed Samir 2",
-            "github" => "github.com/mohamed-samir907"
+            'name'   => 'Mohamed Samir 2',
+            'github' => 'github.com/mohamed-samir907',
         ];
 
         $expected = $this->db->table('users')->update(10000, $data);
 
         $this->assertNull($expected);
     }
-    
+
     /** @test */
     public function testCanFindExistingRecord()
     {
@@ -122,7 +122,7 @@ class JsonDBTest extends TestCase
 
         $this->assertIsArray($expected);
     }
-    
+
     /** @test */
     public function testCanNotFindNotExistingRecord()
     {
@@ -162,7 +162,7 @@ class JsonDBTest extends TestCase
 
         $this->assertIsArray($expected);
     }
-    
+
     /** @test */
     public function testCanGetFirstRecord()
     {
@@ -178,7 +178,7 @@ class JsonDBTest extends TestCase
 
         $this->assertIsInt($expected);
     }
-    
+
     /** @test */
     public function testCanGetCountOfColumnValue()
     {

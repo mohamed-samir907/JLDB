@@ -238,7 +238,7 @@ class JsonDB
     public function last()
     {
         $data = $this->get();
-        
+
         return end($data);
     }
 
