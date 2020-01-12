@@ -4,3 +4,4 @@ storage/
 index.php
 todo.md
 gitpush.sh
+.phpunit.result.cache
